@@ -5,7 +5,7 @@ function dynamic_formula(data, cell_text) {
 		values = [];
 		for (var i in columns) {
 			column = columns[i].trim().split("|");
-			cell_value = get_value_from_index(data, column[0], column[1]);
+			cell_value = get_value_from_displayName(data, column[0], column[1]);
 			values.push(cell_value);
 		}
 		return window[method_name](values);
@@ -14,7 +14,7 @@ function dynamic_formula(data, cell_text) {
 	}
 }
 
-function get_value_from_index(data, col, row) {
+function get_value_from_displayName(data, col, row) {
 	var name = "";
 	for (var i in data.colModel) {
 		if (data.colModel[i].display == col) {
@@ -22,6 +22,10 @@ function get_value_from_index(data, col, row) {
 			break;
 		}
 	}
+	return data.rows[parseInt(row)].cell[name];
+}
+
+function get_value_from_index(data, name, row) {
 	return data.rows[parseInt(row)].cell[name];
 }
 
@@ -61,6 +65,9 @@ function max(values) {
 	return max;
 }
 
+function inc(value) {
+	return value[0]+1;
+}
 
 /*dynamic_formula(data, "=SUM(ID|0, ID|1)");
 dynamic_formula(data, "=AVG(ID|0, ID|1)");

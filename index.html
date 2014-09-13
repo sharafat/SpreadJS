@@ -7,6 +7,7 @@
     <script type="text/javascript" src="js/jquery.editinplace-v2.2.1.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="js/graph.js"></script>
+    <script type="text/javascript" src="js/dynamic-formula.js"></script>
 </head>
 
 
@@ -44,8 +45,8 @@
             var columns = rows[i].cell;
             for (var colModelIndex = 0; colModelIndex < json.colModel.length; colModelIndex++) {
                 tdString += '<td id="' + rows[i].id + "_" + json.colModel[colModelIndex].name + '">'
-                        + columns[json.colModel[colModelIndex].name]
-                        + "</td>";
+                                    + dynamic_formula(json, columns[json.colModel[colModelIndex].name])
+                          + "</td>";
             }
             dataTableElement.append("<tr>" + tdString + "</tr>");
         }
@@ -64,7 +65,7 @@
                         emitData();
                         refreshGraphData();
 
-                        return  newValue;
+                        return dynamic_formula(json, enteredText);
                     },
                     clickEvent: 'dblclick',
                     show_buttons: false
@@ -153,6 +154,7 @@
         var selectorid = '#'+data.id;
         $(selectorid).html(data.value);
     });
+
 </script>
 
 </body>

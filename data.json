@@ -45,7 +45,7 @@
             "cell": {
                 "employeeID": 1,
                 "name": "Tony",
-                "primary_language": "english",
+                "primary_language": "=SUM(EmployeeID|0, EmployeeID|1)",
                 "favorite_color": "green",
                 "favorite_pet": "hamster"
             }
