@@ -55,24 +55,25 @@
         $("#data-table").find("td").editInPlace(
                 {
                     url: "http://com.examplesite.www/users",
-                    callback: function (id, enteredText, originalValue) {
-<<<<<<< HEAD
-                        socket.emit("cell_update", {id: id, value: enteredText});
-=======
-                        if (enteredText == originalValue) {
-                            return enteredText;
+                    callback: function (id, newValue, originalValue) {
+                        if (newValue == originalValue) {
+                            return newValue;
                         }
 
-                        updateJsonData(id, enteredText);
+                        updateJsonData(id, newValue);
+                        emitData();
                         refreshGraphData();
 
->>>>>>> 8d838602eab91148712148fc1a86da4b8e91f7bb
-                        return  enteredText;
+                        return  newValue;
                     },
                     clickEvent: 'dblclick',
                     show_buttons: false
                 }
         );
+    }
+
+    function emitData(cellId, newValue) {
+        socket.emit("cell_update", {id: cellId, value: newValue});
     }
 
     function displayChart() {
@@ -137,7 +138,6 @@
 
 <div id="chart_div_2" style="margin-top: 10px"></div>
 
-<<<<<<< HEAD
 <script type="text/javascript">
     var socket = io('http://localhost:8888');
 
@@ -154,7 +154,6 @@
         $(selectorid).html(data.value);
     });
 </script>
-=======
->>>>>>> 8d838602eab91148712148fc1a86da4b8e91f7bb
+
 </body>
 </html>
