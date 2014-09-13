@@ -19,13 +19,21 @@
 <script type="text/javascript">
     // <![CDATA[
 
-// Load the Visualization API and the piechart package.
-  google.load('visualization', '1.0', {'packages':['corechart']});
-  
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1.0', {'packages': ['corechart']});
+
     var json;
+    var graphOptions;
+
     $.getJSON("data.json").done(function (data) {
         json = data;
 
+        renderGrid();
+        prepareEditInPlace();
+        displayChart();
+    });
+
+    function renderGrid() {
         var dataTableElement = $('#data-table');
 
         var rows = json.rows;
@@ -35,42 +43,79 @@
             var columns = rows[i].cell;
             for (var colModelIndex = 0; colModelIndex < json.colModel.length; colModelIndex++) {
                 tdString += '<td id="' + rows[i].id + "_" + json.colModel[colModelIndex].name + '">'
-                                    + columns[json.colModel[colModelIndex].name]
-                          + "</td>";
+                        + columns[json.colModel[colModelIndex].name]
+                        + "</td>";
             }
             dataTableElement.append("<tr>" + tdString + "</tr>");
         }
+    }
 
-        $("#data-table td").editInPlace(
+    function prepareEditInPlace() {
+        $("#data-table").find("td").editInPlace(
                 {
                     url: "http://com.examplesite.www/users",
                     callback: function (id, enteredText, originalValue) {
-                        alert("id: " + id + ", new value: " + enteredText + ", original value: " + originalValue);
+                        if (enteredText == originalValue) {
+                            return enteredText;
+                        }
+
+                        updateJsonData(id, enteredText);
+                        refreshGraphData();
+
                         return  enteredText;
                     },
                     clickEvent: 'dblclick',
                     show_buttons: false
                 }
         );
+    }
 
-    
-    var options = {
-                cols : ["name", "employeeID"],
-                block: "chart_div",
-                type: "bar",
-                opt: {
-                  'title':'Graph',
-                  'width':400,
-                  'height':300
-                }
-              }
+    function displayChart() {
+        graphOptions = {
+            cols: ["name", "employeeID"],
+            block: "chart_div",
+            type: "bar",
+            opt: {
+                'title': 'Graph',
+                'width': 400,
+                'height': 300
+            }
+        };
 
-        drawChart(json, options);  
-       
-    });
+        drawChart(json, graphOptions);
+    }
+
+    function updateJsonData(cellId, newValue) {
+        var rowNoInJsonData;
+        for (var i = 0; i < json.rows.length; i++) {
+            if (json.rows[i].id == cellId.substring(0, cellId.indexOf('_'))) {
+                rowNoInJsonData = i;
+            }
+        }
+
+        var row = rowNoInJsonData;
+        var column = cellId.substring(cellId.indexOf('_') + 1);
+        json.rows[row].cell[column] = newValue;
+    }
+
+    function refreshGraphData() {
+        drawChart(json, graphOptions);
+    }
+
+    function getColumnList() {
+        var columnList = array();
+
+        for (var i = 0; i < json.colModel.length; i++) {
+            columnList[i] = json.colModel[i].name;
+        }
+
+        return columnList;
+    }
 
     // ]]>
 </script>
+
 <div id="chart_div" style="margin-top: 10px"></div>
+
 </body>
 </html>
