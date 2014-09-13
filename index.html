@@ -46,31 +46,45 @@
                     url: "http://com.examplesite.www/users",
                     callback: function (id, enteredText, originalValue) {
                         alert("id: " + id + ", new value: " + enteredText + ", original value: " + originalValue);
+
                         return  enteredText;
                     },
                     clickEvent: 'dblclick',
                     show_buttons: false
                 }
         );
-
     
-    var options = {
+        var options = {
                 cols : ["name", "employeeID"],
                 block: "chart_div",
                 type: "bar",
                 opt: {
-                  'title':'Graph',
+                  'title':'Bar Plot of Name vs EmployeeID',
                   'width':400,
                   'height':300
                 }
               }
 
         drawChart(json, options);  
+
+        var options2 = {
+                cols : ["name", "employeeID"],
+                block: "chart_div_2",
+                type: "pie",
+                opt: {
+                  'title':'Pie Chart of Name vs EmployeeID',
+                  'width':400,
+                  'height':300
+                }
+              }
+
+        drawChart(json, options2);  
        
     });
 
     // ]]>
 </script>
 <div id="chart_div" style="margin-top: 10px"></div>
+<div id="chart_div_2" style="margin-top: 10px"></div>
 </body>
 </html>
