@@ -83,6 +83,19 @@
         };
 
         drawChart(json, graphOptions);
+
+        var options2 = {
+            cols: ["name", "employeeID"],
+            block: "chart_div_2",
+            type: "pie",
+            opt: {
+                'title': 'Pie Chart of Name vs EmployeeID',
+                'width': 400,
+                'height': 300
+            }
+        }
+
+        drawChart(json, options2);
     }
 
     function updateJsonData(cellId, newValue) {
@@ -99,7 +112,7 @@
     }
 
     function refreshGraphData() {
-        drawChart(json, graphOptions);
+        displayChart();
     }
 
     function getColumnList() {
@@ -116,6 +129,8 @@
 </script>
 
 <div id="chart_div" style="margin-top: 10px"></div>
+
+<div id="chart_div_2" style="margin-top: 10px"></div>
 
 </body>
 </html>
