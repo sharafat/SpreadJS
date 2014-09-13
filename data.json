@@ -1,6 +1,44 @@
 {
     "page": 1,
     "total": 12,
+    "colModel": [
+        {
+            "display": "EmployeeID",
+            "name": "employeeID",
+            "width": 90,
+            "sortable": true,
+            "align": "center"
+        },
+        {
+            "display": "Name",
+            "name": "name",
+            "width": 120,
+            "sortable": true,
+            "align": "left"
+        },
+        {
+            "display": "Primary Language",
+            "name": "primary_language",
+            "width": 120,
+            "sortable": true,
+            "align": "left"
+        },
+        {
+            "display": "Favorite Color",
+            "name": "favorite_color",
+            "width": 80,
+            "sortable": true,
+            "align": "left",
+            "hide": true
+        },
+        {
+            "display": "Favorite Animal",
+            "name": "favorite_pet",
+            "width": 80,
+            "sortable": true,
+            "align": "right"
+        }
+    ],
     "rows": [
         {
             "id": 1,
