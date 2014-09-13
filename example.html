@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="js/graph.js"></script>
+    <script type="text/javascript">
+    var data = {
+                "url": "http: //192.168.4.154/hackathon/data.php",
+                "colModel": [
+                    {
+                        "display": "ID",
+                        "name": "id",
+                        "type": "string",
+                        "sortable": true,
+                        "align": "center"
+                    },
+                    {
+                        "display": "Name",
+                        "name": "name",
+                        "type": "number",
+                        "sortable": true,
+                        "align": "left"
+                    },
+                    {
+                        "display": "Email",
+                        "name": "email",
+                        "type": "string",
+                        "sortable": false,
+                        "align": "left"
+                    }
+                ],
+                "rows": [
+                    {
+                        "id": 1,
+                        "cell": {
+                            "id": 10,
+                            "name": "Student10name",
+                            "email": "a@a.com"
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "cell": {
+                            "id": 11,
+                            "name": "Student11name",
+                            "email": "b@b.com"
+                        }
+                    }
+                ]
+            }
+
+      var options = {
+        cols : ["name", "id"],
+        block: "chart_div",
+        type: "bar",
+        opt: {
+          'title':'Graph',
+          'width':400,
+          'height':300
+        }
+      }
+      drawChart(options);
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+  </body>
+</html>
