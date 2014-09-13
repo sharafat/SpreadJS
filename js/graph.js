@@ -1,8 +1,9 @@
-function drawChart(options) {
+function drawChart(dataTable, options) {
   var cols = options.cols;
   var div = options.block;
   var type = options.type;
   var opt = options.opt;
+  var data = dataTable;
 
   var table = new Array([]);
   var colMeths = data.colModel;
@@ -32,7 +33,7 @@ function drawChart(options) {
   }
 
   // Load the Visualization API and the piechart package.
-  google.load('visualization', '1.0', {'packages':['corechart']});
+  //google.load('visualization', '1.0', {'packages':['corechart']});
 
   // Set a callback to run when the Google Visualization API is loaded.
   google.setOnLoadCallback(function () {
