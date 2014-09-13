@@ -147,7 +147,7 @@ $.extend(InlineEditor.prototype, {
 		this.dom
 			.bind('mouseenter.editInPlace', function(){ that.addHoverEffect(); })
 			.bind('mouseleave.editInPlace', function(){ that.removeHoverEffect(); })
-			.bind('click.editInPlace', function(anEvent){ that.openEditor(anEvent); });
+			.bind('dblclick.editInPlace', function(anEvent){ that.openEditor(anEvent); });
 	},
 	
 	disconnectOpeningEvents: function() {
