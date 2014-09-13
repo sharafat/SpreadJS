@@ -34,7 +34,9 @@
 
             var columns = rows[i].cell;
             for (var colModelIndex = 0; colModelIndex < json.colModel.length; colModelIndex++) {
-                tdString += "<td>" + columns[json.colModel[colModelIndex].name] + "</td>";
+                tdString += '<td id="' + rows[i].id + "_" + json.colModel[colModelIndex].name + '">'
+                                    + columns[json.colModel[colModelIndex].name]
+                          + "</td>";
             }
             dataTableElement.append("<tr>" + tdString + "</tr>");
         }
@@ -42,8 +44,8 @@
         $("#data-table td").editInPlace(
                 {
                     url: "http://com.examplesite.www/users",
-                    callback: function (unused, enteredText) {
-                        alert(enteredText);
+                    callback: function (id, enteredText, originalValue) {
+                        alert("id: " + id + ", new value: " + enteredText + ", original value: " + originalValue);
                         return  enteredText;
                     },
                     clickEvent: 'dblclick',
